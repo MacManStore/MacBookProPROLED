@@ -4,14 +4,8 @@ class AutoHeightEmbed extends HTMLElement {
 
         const url = "https://macmanstore.github.io/MacBookProPROLED/";
 
-        // this.style.display = "block";
-        // this.style.width = "100%";
-        // this.style.height = "300px";
-
         this.style.display = "block";
         this.style.width = "100%";
-        this.style.maxWidth = "100%";
-        this.style.boxSizing = "border-box";
         this.style.height = "300px";
 
         this.innerHTML = `
