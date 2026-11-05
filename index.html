@@ -4321,7 +4321,7 @@
       }
       .channel-html {
         overflow-x: visible;
-        --global-content-max-width: 320px;
+        --global-content-max-width: 420px;
       }
       .channel-html .colornav-items {
         max-width: 83px;
@@ -5208,6 +5208,23 @@
         margin-right: 19px;
       }
     }
+    @container (max-width: 400px) {
+  .channel-html .section .section-content {
+    box-sizing: border-box;
+    width: calc(100% - 32px);
+  }
+
+  .channel-html .responsive-image img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
+
+  .channel-html .channel-custom-font-custom-hero-headline {
+    font-size: clamp(28px, 8cqi, 32px);
+    line-height: 1.1;
+  }
+}
   </style>
   <!--END > CHANNEL STYLES -->
   <noscript><style>
