@@ -40,6 +40,7 @@
 //         window.removeEventListener("message", this.handleMessage);
 //     }
 // }
+// customElements.define("auto-height-embed", AutoHeightEmbed);
 
 
 
@@ -131,6 +132,3 @@ class AutoHeightEmbed extends HTMLElement {
 
 customElements.define("auto-height-embed", AutoHeightEmbed);
 
-
-
-// customElements.define("auto-height-embed", AutoHeightEmbed);
