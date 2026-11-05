@@ -2,7 +2,7 @@ class AutoHeightEmbed extends HTMLElement {
 
     connectedCallback() {
 
-        const url = "YOUR_GITHUB_HTML_URL";
+        const url = "https://macmanstore.github.io/MacBookProPROLED/";
 
         this.style.display = "block";
         this.style.width = "100%";
