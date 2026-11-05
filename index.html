@@ -6767,4 +6767,35 @@
     <!--END > CHANNEL SCRIPTS -->
   </div>
 
+  <script>
+(function () {
+    function reportHeight() {
+        const height = Math.max(
+            document.documentElement.scrollHeight,
+            document.body.scrollHeight,
+            document.documentElement.offsetHeight,
+            document.body.offsetHeight
+        );
+
+        window.parent.postMessage({
+            type: "resize",
+            height: height
+        }, "*");
+    }
+
+    const observer = new ResizeObserver(reportHeight);
+
+    observer.observe(document.documentElement);
+    observer.observe(document.body);
+
+    window.addEventListener("load", reportHeight);
+
+    if (document.fonts) {
+        document.fonts.ready.then(reportHeight);
+    }
+
+    reportHeight();
+})();
+</script>
+
 </body></html>
