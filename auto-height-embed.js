@@ -43,6 +43,7 @@
 
 
 
+
 class AutoHeightEmbed extends HTMLElement {
 
     connectedCallback() {
@@ -55,9 +56,8 @@ class AutoHeightEmbed extends HTMLElement {
             min-width: 0;
             max-width: 100%;
             height: 300px;
-            margin: 0;
-            padding: 0;
             box-sizing: border-box;
+            overflow: hidden;
         `;
 
         this.innerHTML = `
@@ -81,6 +81,18 @@ class AutoHeightEmbed extends HTMLElement {
         this.frame = this.querySelector("iframe");
         this.expectedOrigin = new URL(url).origin;
 
+        // Synchronize iframe width with Custom Element
+        this.widthObserver = new ResizeObserver(() => {
+
+            const width = this.clientWidth;
+
+            this.frame.style.width = `${width}px`;
+
+        });
+
+        this.widthObserver.observe(this);
+
+        // Receive height measurements
         this.handleMessage = (event) => {
 
             if (event.origin !== this.expectedOrigin) return;
@@ -94,23 +106,31 @@ class AutoHeightEmbed extends HTMLElement {
             this.style.height = `${height}px`;
             this.frame.style.height = `${height}px`;
 
-            console.log("Embedded page dimensions:", {
-                elementWidth: this.clientWidth,
+            console.log("Embed dimensions:", {
+                wixWidth: this.clientWidth,
                 iframeWidth: this.frame.clientWidth,
                 contentWidth: event.data.viewportWidth,
-                documentWidth: event.data.documentWidth
+                contentHeight: height
             });
+
         };
 
         window.addEventListener("message", this.handleMessage);
     }
 
     disconnectedCallback() {
+
         window.removeEventListener("message", this.handleMessage);
+
+        if (this.widthObserver) {
+            this.widthObserver.disconnect();
+        }
+
     }
 }
 
 customElements.define("auto-height-embed", AutoHeightEmbed);
+
 
 
 // customElements.define("auto-height-embed", AutoHeightEmbed);
